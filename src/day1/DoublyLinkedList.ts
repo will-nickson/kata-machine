@@ -116,11 +116,11 @@ export default class DoublyLinkedList<T> {
         }
 
         if (node.prev) {
-            node.prev = node.next;
+            node.prev.next = node.next;
         }
 
         if (node.next) {
-            node.next = node.prev;
+            node.next.prev = node.prev;
         }
 
         if (node === this.head) {
@@ -131,7 +131,8 @@ export default class DoublyLinkedList<T> {
             this.tail = node.prev;
         }
 
-        return;
+        node.prev = node.next = undefined;
+        return node.value;
     }
 
     private getAt(idx: number): Node<T> | undefined {
